@@ -13,6 +13,8 @@
     "restart": "node node_scripts_personal/push.js"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
+    "modern-normalize": "^3.0.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
