@@ -1,9 +1,9 @@
 /* import clsx from 'clsx'; */
 import css from './VoteOptions.module.css';
-import type { Votes } from '../../types/votes';
+import type { /* Votes, */ VoteType } from '../../types/votes';
 
 interface VoteOptionsProps {
-  onVote: (type: keyof Votes) => void;
+  onVote: (type: /* keyof Votes */ VoteType) => void;
   onReset: () => void;
   canReset: boolean;
 }
