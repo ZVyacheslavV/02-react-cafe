@@ -20,14 +20,14 @@ const App = () => {
     bad: 0,
   });
 
-  const handleVote = (type: keyof Votes /* VoteType */) => {
+  const handleVote = (type: /* keyof Votes */ VoteType): void => {
     setVotes({
       ...votes,
       [type]: /* votes[type]++ */ votes[type] + 1,
     });
   };
 
-  const resetVotes = () =>
+  const resetVotes = (): void =>
     setVotes({
       good: 0,
       neutral: 0,
@@ -37,7 +37,7 @@ const App = () => {
   return (
     <div className={css.app}>
       <CafeInfo />
-      <VoteOptions />
+      <VoteOptions onVote={handleVote} onReset={resetVotes} canReset={true} />
     </div>
   );
 };
