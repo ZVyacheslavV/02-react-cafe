@@ -4,6 +4,7 @@ import type { Votes, VoteType } from '../../types/votes';
 import CafeInfo from '../CafeInfo/CafeInfo';
 import css from './App.module.css';
 import VoteOptions from '../VoteOptions/VoteOptions';
+import VoteStats from '../VoteStats/VoteStats';
 
 const App = () => {
   // const [count, setCount] = useState(0);
@@ -19,6 +20,12 @@ const App = () => {
     neutral: 0,
     bad: 0,
   });
+
+  const totalVotes = votes.good + votes.neutral + votes.bad;
+
+  const positiveRate = totalVotes
+    ? Math.round((votes.good / totalVotes) * 100)
+    : 0;
 
   const handleVote = (type: /* keyof Votes */ VoteType): void => {
     setVotes({
@@ -38,6 +45,11 @@ const App = () => {
     <div className={css.app}>
       <CafeInfo />
       <VoteOptions onVote={handleVote} onReset={resetVotes} canReset={true} />
+      <VoteStats
+        votes={votes}
+        totalVotes={totalVotes}
+        positiveRate={positiveRate}
+      />
     </div>
   );
 };
