@@ -5,16 +5,9 @@ import CafeInfo from '../CafeInfo/CafeInfo';
 import css from './App.module.css';
 import VoteOptions from '../VoteOptions/VoteOptions';
 import VoteStats from '../VoteStats/VoteStats';
+import Notification from '../Notification/Notification';
 
 const App = () => {
-  // const [count, setCount] = useState(0);
-
-  /*   const votes: Votes = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
-  }; */
-
   const [votes, setVotes] = useState<Votes>({
     good: 0,
     neutral: 0,
@@ -30,7 +23,7 @@ const App = () => {
   const handleVote = (type: /* keyof Votes */ VoteType): void => {
     setVotes({
       ...votes,
-      [type]: /* votes[type]++ */ votes[type] + 1,
+      [type]: votes[type] + 1,
     });
   };
 
@@ -44,12 +37,20 @@ const App = () => {
   return (
     <div className={css.app}>
       <CafeInfo />
-      <VoteOptions onVote={handleVote} onReset={resetVotes} canReset={true} />
-      <VoteStats
-        votes={votes}
-        totalVotes={totalVotes}
-        positiveRate={positiveRate}
+      <VoteOptions
+        onVote={handleVote}
+        onReset={resetVotes}
+        canReset={totalVotes > 0}
       />
+      {totalVotes ? (
+        <VoteStats
+          votes={votes}
+          totalVotes={totalVotes}
+          positiveRate={positiveRate}
+        />
+      ) : (
+        <Notification />
+      )}
     </div>
   );
 };
